@@ -5,7 +5,8 @@ import { createClient } from '../lib/supabase'
 import { useRouter } from 'next/navigation'
 
 export default function Dashboard() {
-  const [user, setUser] = useState(null)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const [user, setUser] = useState<any>(null)
   const supabase = createClient()
   const router = useRouter()
 
@@ -19,8 +20,7 @@ export default function Dashboard() {
       }
     }
     getUser()
-  }, [])
-
+}, [router, supabase.auth])
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push('/login')
